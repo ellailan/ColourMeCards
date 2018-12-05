@@ -63,7 +63,7 @@ app.post('/v1/scores/new', function(req, res) {
     const user = result[0]
 
     const insert = {
-      user_id: user.id,
+      user_id: user._id,
       username: user.username,
       score: req.body.score,
       game: req.body.game
