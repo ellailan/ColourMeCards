@@ -33,7 +33,7 @@ api.getScores = async function(cb = null){
 api.setScore = async function(options, cb){
   const success = await api.reqJson('/v1/scores/new', 'POST', options)
   //cb
-  return cb ? cb(success.success) : null
+  return cb ? cb(success) : null
 }
 
 api.makeUser = async function(cb){
