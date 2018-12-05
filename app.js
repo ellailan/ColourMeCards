@@ -17,7 +17,8 @@ const mongoURI = 'mongodb://heroku_5dq6xsh1:7hr1gqgr1k4fg80p4lkpc33o3c@ds229465.
 //depretiation
 const mongoOptions = { useNewUrlParser: true };
 
-const port = 3000
+// process.env.PORT lets the port be set by Heroku
+var port = process.env.PORT || 3000;
 
 //connect
 MongoClient.connect(mongoURI, mongoOptions, (err, client) => {
