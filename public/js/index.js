@@ -7,6 +7,8 @@ if(window.localStorage.high_score) {
   window.localStorage.high_score = highScore;
 }
 
+let user = JSON.parse(window.localStorage.getItem('user'))
+
 let stage;
 
 // The stage is vertical and defualts to common 980 width on phones
@@ -121,7 +123,15 @@ drawing.goTo(0, -100)
 
 stage.whenFlag(function() {
   //stage.broadcastMessage('gameStart')
-  stage.broadcastMessage('drawingColor')
+  stage.broadcastMessage('drawingColor');
+
+  if(!user){
+    api.makeUser(function(user){
+      window.localStorage.setItem('user', JSON.stringify(user))
+    })
+    user = JSON.parse(window.localStorage.getItem('user'))
+  }
+
 })
 
 function coloring (){
@@ -369,7 +379,6 @@ stage.whenReceiveMessage('gameStart', function() {
   }
 })
 
-
 stage.whenReceiveMessage('endGame', function (){
     forever = false;
     thePrecious = null;
@@ -385,6 +394,15 @@ stage.whenReceiveMessage('endGame', function (){
         stage.removeSprite(arr[i])
       }
     };
+
+    let options = {
+      game: CARD_ID,
+      score: score,
+      user_id: user._id,
+      username: user.username
+    }
+
+    api.setScore(options)
 
     if (score > highScore) {
       highScore = score;
