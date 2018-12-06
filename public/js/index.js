@@ -126,12 +126,11 @@ stage.whenFlag(function() {
   stage.broadcastMessage('drawingColor');
 
   if(!user){
-    api.makeUser(function(user){
-      window.localStorage.setItem('user', JSON.stringify(user))
+    api.makeUser(function(u){
+      window.localStorage.setItem('user', JSON.stringify(u))
+      user = u;
     })
-    user = JSON.parse(window.localStorage.getItem('user'))
   }
-
 })
 
 function coloring (){
