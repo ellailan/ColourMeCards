@@ -32,3 +32,36 @@ body {
   color: #bcc5d3;
 }
 
+.scores-game {
+/*  background: #efefef;*/
+  float: left;
+  height: 100px;
+  width: 150px;
+}
+
+.scores-username {
+/*  background: #eeffff;*/
+  width: 500px;
+  height: 100px;
+  text-align: center;
+  display: inline-block;
+  line-height: 100px;
+}
+
+.scores-score{
+/*  background: #0f0f0f;*/
+/*  color: #f0f0f0;*/
+  height: 100px;
+  float: right;
+  text-align: center;
+  width: 150px;
+  line-height: 100px
+}
+
+.scores-container {
+  font-family: Impact, Charcoal, sans-serif;
+  font-size: 36px;
+  width: 800px;
+  height: 100px;
+  margin: 0px auto;
+}

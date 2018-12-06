@@ -10,9 +10,97 @@
 </head>
 
 <body>
-  <div id="stage"></div>
   <script src='https://cdn.jsdelivr.net/npm/blocklike@0.9.10/dist/blocklike-0.9.10.min.js'></script>
   <script src='../js/api.js'></script>
+  <script>
+    // make stage
+let stage;
+
+// The stage is vertical and defualts to common 980 width on phones
+// for anything not a vertical phone (mainly PC) we hack...
+if(window.innerHeight < 1743 && window.innerHeight < window.innerWidth) {
+  //set a fixed stage size
+  stage = new blockLike.Stage({ width: 980, height: 1743 });
+  // zoom out (scale down)
+  stage.ratio = window.innerHeight/1743;
+  stage.zoom(stage.ratio * 100);
+
+  // zooming leaves the body at the same size.
+  // need to scroll to target.
+  stage.whenLoaded(function(){
+    // wait for all sizeing to happen
+    this.wait(0.2);
+    // scroll to half the reminder after scaling
+    window.scrollTo(0, (1743-window.innerHeight)/2);
+  });
+  // disable user scolling
+  window.addEventListener('mousewheel', function(e) {
+    e.preventDefault();
+  });
+  window.addEventListener('scroll', function(e) {
+    e.preventDefault();
+  });
+
+} else {
+  stage = new blockLike.Stage();
+}
+
+let paper = new blockLike.Backdrop({
+    color: '#fff9f4'
+});
+
+paper.addTo(stage);
+
+    // we keep the rows for the score table (sprites) globally
+    let scoreTable = []
+
+    /* render functions for scoreboard start */
+    function deleteTable(){
+      scoreTable.forEach(function(item, i){
+        scoreTable[i].removeFrom(stage)
+      })
+      scoreTable = []
+    }
+
+    function renderTable(scores, space){
+      // remove rendered
+      deleteTable()
+
+      // make all rows
+      scores.forEach(function(item, i){
+
+        // make template
+        let string =
+        `<div class="scores-container">
+          <img class="scores-game" src="./${item.game}/img/${item.game}-precious.svg" />
+          <span class="scores-username">${item.username}</span>
+          <span class="scores-score">${item.score}</span>
+        <div>`;
+
+        // make sprites
+        let sprite = new blockLike.Sprite({width: stage.width, height: space})
+        scoreTable.push(sprite)
+        sprite.addTo(stage)
+
+        // put text
+        sprite.inner(string)
+
+        // alternate between -stage.width and stage.width 
+        sprite.goTo((((i % 2) * 2) - 1) * stage.width, i * space - (space * scores.length /2))
+
+        // glide for 1 second to the middle
+        sprite.glide(1, 0, sprite.y)
+      }) 
+    }
+
+    stage.whenLoaded(function(){
+      // get scores
+      api.getScores(function(scores){
+        // and then:
+        stage.invoke(renderTable, [scores.reverse().slice(0), 120])
+      })
+    })
+  </script>
 </body>
 
 </html>
