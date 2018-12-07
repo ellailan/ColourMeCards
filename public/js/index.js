@@ -79,8 +79,13 @@ let scoreBoard = new blockLike.Sprite({
 let information = new blockLike.Sprite({
   costume: informationPanel,
 })
+let usernameDisplay = new blockLike.Sprite({
+  image: null,
+  width: 800,
+})
 
 scoreBoard.addClass('score-board');
+usernameDisplay.addClass('username-display');
 
 // loading assets into costumes
 for (let i = 0; i < NUMBER_OF_COLORING_FRAMES; i++) {
@@ -110,14 +115,16 @@ for (let i = 0; i < NUMBER_OF_COLORING_FRAMES; i++) {
 button.hide();
 scoreBoard.hide();
 information.hide();
+usernameDisplay.hide();
 
 drawing.addTo(stage);
 text.addTo(stage);
 button.addTo(stage);
 scoreBoard.addTo(stage);
+usernameDisplay.addTo(stage);
 information.addTo(stage);
 
-button.goTo( -stage.width, 300)
+//button.goTo( -stage.width, 300)
 text.goTo(0, 300)
 drawing.goTo(0, -100)
 
@@ -148,14 +155,6 @@ drawing.whenReceiveMessage('drawingColor', function (){
   stage.broadcastMessage('textColor')
 })
 
-text.whenReceiveMessage('textColor', function (){
-  this.show();
-  this.invoke(coloring);
-
-  stage.broadcastMessage('animate');
-})
-
-
 drawing.whenReceiveMessage('animate', function (){
   stage.switchBackdropTo(sky);
 
@@ -180,6 +179,17 @@ drawing.whenReceiveMessage('animate', function (){
 
 })
 
+drawing.whenReceiveMessage('gameStart', function(){
+  this.hide();
+})
+
+text.whenReceiveMessage('textColor', function (){
+  this.show();
+  this.invoke(coloring);
+
+  stage.broadcastMessage('animate');
+})
+
 text.whenReceiveMessage('animate', function (){
   this.goTo(0, 300)
   this.show();
@@ -201,17 +211,13 @@ text.whenReceiveMessage('animate', function (){
 
 button.whenReceiveMessage('animate', function (){
   this.wait(10 * ANIMATION_FRAME_DURATION)
-  this.goTo( -stage.width, 300)
+  this.goTo(0 ,-stage.height)
   this.show();
-  this.glide(1, 0, this.y);
+  this.glide(1, this.x, 450);
 })
 
 button.whenClicked(function (){
   stage.broadcastMessage('gameStart')
-  this.hide();
-})
-
-drawing.whenReceiveMessage('gameStart', function(){
   this.hide();
 })
 
@@ -221,7 +227,7 @@ scoreBoard.whenReceiveMessage('animate', function(){
   this.css('-webkit-text-stroke', '7px black')
   this.inner(highScore + '')
   this.show();
-  this.glide(1, this.x, -400);
+  this.glide(1, this.x, -450);
 }) 
 
 scoreBoard.whenReceiveMessage('gameStart', function(){
@@ -233,7 +239,19 @@ information.whenReceiveMessage('animate', function(){
   this.wait(10*ANIMATION_FRAME_DURATION)
   this.goTo(0, -stage.height)
   this.show();
-  this.glide(1, this.x, -100);  
+  this.glide(1, this.x, 100);  
+})
+
+usernameDisplay.whenReceiveMessage('animate', function(){
+  this.wait(10*ANIMATION_FRAME_DURATION)
+  this.goTo(0, -stage.height)
+  this.inner(user.username)
+  this.show();
+  this.glide(1, this.x, -200);  
+})
+
+usernameDisplay.whenReceiveMessage('gameStart', function(){
+  this.hide()
 })
 
 /**
@@ -297,7 +315,7 @@ function createDeadly (){
   newSprite.goTo(random(), stage.height / 2 + 100)
   
   newSprite.whenClicked(function (){
-    stage.broadcastMessage('endGame')
+    stage.broadcastMessage('gameEnd')
     this.removeFrom(stage);
   })
 
@@ -363,7 +381,7 @@ stage.whenReceiveMessage('gameStart', function() {
     // check if precious wasn't caught
     if(thePrecious) {
       if (thePrecious.touchingEdge() === 'bottom'){
-        stage.broadcastMessage('endGame');
+        stage.broadcastMessage('gameEnd');
       }
     }
 
@@ -378,7 +396,7 @@ stage.whenReceiveMessage('gameStart', function() {
   }
 })
 
-stage.whenReceiveMessage('endGame', function (){
+stage.whenReceiveMessage('gameEnd', function (){
     forever = false;
     thePrecious = null;
     theDeadly = null;  
