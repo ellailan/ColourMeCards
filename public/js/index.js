@@ -277,7 +277,7 @@ function renderTable(scores, space) {
     // make template
     let string =
     `<div class="scores-container">
-      <img class="scores-game" src="./${item.game}/img/${item.game}-precious.svg" />
+      <img class="scores-game" src="../${item.game}/img/${item.game}-precious.svg" />
       <span class="scores-username">${item.username}</span>
       <span class="scores-score">${item.score}</span>
     <div>`;
@@ -476,7 +476,18 @@ stage.whenReceiveMessage('gameEnd', function (){
     scoreBoard.wait(1);
     scoreBoard.hide();
     score = 0;
-    this.broadcastMessage('animate');
+    this.broadcastMessage('showScoreBoard');
+})
+
+stage.whenReceiveMessage('showScoreBoard', function(){
+   // get scores
+  api.getScores(function(scores){
+    // and then:
+    stage.invoke(renderTable, [scores, 120])
+    stage.wait(3)
+    stage.invoke(deleteTable);
+    stage.broadcastMessage('animate');
+  }) 
 })
 
 stage.whenKeyPressed('Escape', () => { forever = false; });
