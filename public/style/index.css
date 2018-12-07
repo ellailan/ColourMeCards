@@ -44,6 +44,7 @@ body {
   float: left;
   height: 100px;
   width: 150px;
+  background-repeat: no-repeat;
 }
 
 .scores-username {
@@ -54,7 +55,7 @@ body {
   line-height: 100px;
 }
 
-.scores-score{
+.scores-score{  
   height: 100px;
   float: right;
   text-align: center;
