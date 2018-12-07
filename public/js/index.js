@@ -110,7 +110,6 @@ for (let i = 0; i < NUMBER_OF_COLORING_FRAMES; i++) {
   drawing.addCostume(c);
 };
 
-
 // init
 button.hide();
 scoreBoard.hide();
@@ -146,7 +145,6 @@ function coloring (){
     this.nextCostume();
   };
 }
-
 
 drawing.whenReceiveMessage('drawingColor', function (){
   this.show();
@@ -253,6 +251,52 @@ usernameDisplay.whenReceiveMessage('animate', function(){
 usernameDisplay.whenReceiveMessage('gameStart', function(){
   this.hide()
 })
+
+/**
+global scoreboard
+*/
+
+// we keep the rows for the score table (sprites) globally
+let scoreTable = []
+
+/* render functions for scoreboard start */
+function deleteTable(){
+  scoreTable.forEach(function(item){
+    item.removeFrom(stage)
+  })
+  scoreTable = []
+}
+
+function renderTable(scores, space) {
+  // remove rendered
+  deleteTable()
+
+  // make all rows
+  scores.reverse().forEach(function(item, i) {
+
+    // make template
+    let string =
+    `<div class="scores-container">
+      <img class="scores-game" src="./${item.game}/img/${item.game}-precious.svg" />
+      <span class="scores-username">${item.username}</span>
+      <span class="scores-score">${item.score}</span>
+    <div>`;
+
+    // make sprites
+    let sprite = new blockLike.Sprite({width: 800, height: space})
+    scoreTable.push(sprite)
+    sprite.addTo(stage)
+
+    // put text
+    sprite.inner(string)
+
+    // alternate between -stage.width and stage.width 
+    sprite.goTo((((i % 2) * 2) - 1) * stage.width, i * space - (space * scores.length /2))
+
+    // glide for 1 second to the middle
+    sprite.glide(1, 0, sprite.y)
+  }) 
+}
 
 /**
  Game
