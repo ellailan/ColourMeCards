@@ -41,14 +41,12 @@ body {
 
 /* score board */
 .scores-game {
-/*  background: #efefef;*/
   float: left;
   height: 100px;
   width: 150px;
 }
 
 .scores-username {
-/*  background: #eeffff;*/
   width: 500px;
   height: 100px;
   text-align: center;
@@ -57,8 +55,6 @@ body {
 }
 
 .scores-score{
-/*  background: #0f0f0f;*/
-/*  color: #f0f0f0;*/
   height: 100px;
   float: right;
   text-align: center;
@@ -71,5 +67,4 @@ body {
   font-size: 36px;
   width: 800px;
   height: 100px;
-  margin: 0px auto;
 }

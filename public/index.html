@@ -56,18 +56,18 @@ paper.addTo(stage);
 
     /* render functions for scoreboard start */
     function deleteTable(){
-      scoreTable.forEach(function(item, i){
-        scoreTable[i].removeFrom(stage)
+      scoreTable.forEach(function(item){
+        item.removeFrom(stage)
       })
       scoreTable = []
     }
 
-    function renderTable(scores, space){
+    function renderTable(scores, space) {
       // remove rendered
       deleteTable()
 
       // make all rows
-      scores.forEach(function(item, i){
+      scores.reverse().forEach(function(item, i) {
 
         // make template
         let string =
@@ -78,7 +78,7 @@ paper.addTo(stage);
         <div>`;
 
         // make sprites
-        let sprite = new blockLike.Sprite({width: stage.width, height: space})
+        let sprite = new blockLike.Sprite({width: 800, height: space})
         scoreTable.push(sprite)
         sprite.addTo(stage)
 
@@ -97,7 +97,7 @@ paper.addTo(stage);
       // get scores
       api.getScores(function(scores){
         // and then:
-        stage.invoke(renderTable, [scores.reverse().slice(0), 120])
+        stage.invoke(renderTable, [scores, 120])
       })
     })
   </script>
