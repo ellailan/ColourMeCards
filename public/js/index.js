@@ -18,28 +18,19 @@ if(window.innerHeight < 1743 && window.innerHeight < window.innerWidth) {
   stage = new blockLike.Stage({ width: 980, height: 1743, pace: 0 });
   // zoom out (scale down)
   stage.ratio = window.innerHeight/1743;
+  stage.css({transformOrigin: 'top'})
   stage.zoom(stage.ratio * 100);
 
-  // zooming leaves the body at the same size.
-  // need to scroll to target.
-  stage.whenLoaded(function(){
-    // wait for all sizeing to happen
-    this.wait(0.2);
-    // scroll to half the reminder after scaling
-    window.scrollTo(0, (1743-window.innerHeight)/2);
-  });
   // disable user scolling
   window.addEventListener('mousewheel', function(e) {
     e.preventDefault();
   });
-  window.addEventListener('scroll', function(e) {
-    e.preventDefault();
-  });
-
+  window.onkeydown = function(e) { 
+      return !(e.keyCode == 32);
+  };
 } else {
   stage = new blockLike.Stage({ pace: 0 });
 }
-
 
 let paper = new blockLike.Backdrop({
     color: '#fff9f4'
