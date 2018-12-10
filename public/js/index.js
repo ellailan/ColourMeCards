@@ -153,6 +153,8 @@ drawing.whenReceiveMessage('drawingColor', function (){
 
 drawing.whenReceiveMessage('animate', function (){
   stage.switchBackdropTo(sky);
+  scoreBoard.addClass('alive');
+  scoreBoard.removeClass('dead');
 
   this.goTo(0, -100)
   this.show();
@@ -345,7 +347,6 @@ function createRegular (number){
     this.removeFrom(stage);
   })
 
-  //newSprite.glide(5, newSprite.x, -stage.height / 2 - 100)
 }
 
 function createDeadly (){
@@ -362,8 +363,6 @@ function createDeadly (){
     stage.broadcastMessage('gameEnd')
     this.removeFrom(stage);
   })
-
-  //newSprite.glide(5, newSprite.x, -stage.height / 2 - 100)
 
   return newSprite;
 }
@@ -394,8 +393,6 @@ function createPrecious (){
       thePrecious = null;
     }
   })
-
-  //newSprite.glide(5, newSprite.x, -stage.height / 2 - 100);
 
   return newSprite;
 }
@@ -463,7 +460,11 @@ stage.whenReceiveMessage('gameEnd', function (){
     theDeadly = null;  
 
     this.switchBackdropTo(dead);
+    scoreBoard.addClass('dead');
+    scoreBoard.removeClass('alive');
     this.playSound('../sounds/end.wav')
+    usernameDisplay.show();
+
     // clone the array
     let arr = stage.sprites.slice();
     // removes the game pieces
@@ -488,10 +489,13 @@ stage.whenReceiveMessage('gameEnd', function (){
     };
 
     this.wait(1)
-    this.switchBackdropTo(sky);
-    scoreBoard.glide(1, 0, 0)
+
+    //scoreBoard.glide(1, 0, 0)
+    //usernameDisplay.glide(1, 0, 100)
     scoreBoard.wait(1);
     scoreBoard.hide();
+    usernameDisplay.hide();
+    this.switchBackdropTo(paper);
     score = 0;
     this.broadcastMessage('showScoreBoard');
 })
@@ -501,7 +505,7 @@ stage.whenReceiveMessage('showScoreBoard', function(){
   api.getScores(function(scores){
     // and then:
     stage.invoke(renderTable, [scores, 120])
-    stage.wait(3)
+    stage.wait(4)
     stage.invoke(deleteTable);
     stage.broadcastMessage('animate');
   }) 

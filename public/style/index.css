@@ -15,7 +15,14 @@ body {
   font-size: 144px;
   text-align: center;
   font-family: Impact, Charcoal, sans-serif;
+}
+
+.alive{
   color: #bcc5ff;
+}
+
+.dead{
+  color: #ffbcc5;
 }
 
 .username-display{
