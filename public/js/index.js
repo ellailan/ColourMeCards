@@ -362,7 +362,9 @@ function createPrecious (){
   let newSprite = new blockLike.Sprite({
     costume: precious,
   })
-  newSprite.spriteType ='gamePiece'  
+  newSprite.spriteType ='gamePiece'
+  newSprite.precious = true;
+
   newSprite.css({filter: 'drop-shadow(rgb(102, 102, 102) 3px 3px 6px)'})
 
   newSprite.addTo(stage);
@@ -389,7 +391,6 @@ function createPrecious (){
 }
 
 thePrecious = null;
-theDeadly = null;
 
 information.whenReceiveMessage('gameStart', function(){
   this.hide()
@@ -401,18 +402,20 @@ stage.whenReceiveMessage('gameStart', function() {
 
   while(forever){
     if (counter % 10 === 0) {
+      let random = Math.floor(Math.random() * (8 - (`${score}`).length))
       // decide what to drop
-      if(!thePrecious){
-        thePrecious = createPrecious();
-      } else if(!theDeadly){
-        theDeadly = createDeadly();
+
+      if (random === 0) {
+        createPrecious();
+      } else if (random === 1) {
+        createDeadly();
       } else {
         createRegular(Math.floor((Math.random() * 8) + 1));
       }
+
     }
     
-
-    this.wait(0.01)
+    this.wait(0.001)
 
     // clone the array
     let arr = stage.sprites.slice();
@@ -420,25 +423,14 @@ stage.whenReceiveMessage('gameStart', function() {
     for (var i = 0; i < arr.length; i++) {
       if(arr[i].spriteType === 'gamePiece'){
         arr[i].changeY(-15)
+        if (arr[i].precious && arr[i].touchingEdge() === 'bottom'){
+          stage.broadcastMessage('gameEnd');
+        }
         if (arr[i].y < -(stage.height / 2 + 100)){
           stage.removeSprite(arr[i])
         }
       }
     };
-
-    // check if precious wasn't caught
-    if(thePrecious) {
-      if (thePrecious.touchingEdge() === 'bottom'){
-        stage.broadcastMessage('gameEnd');
-      }
-    }
-
-    // allow new deadly
-    if(theDeadly) {
-      if (theDeadly.touchingEdge() === 'bottom'){
-        theDeadly = null;
-      }
-    }
 
     counter += 1;
     scoreBoard.inner(score + '')
@@ -448,7 +440,6 @@ stage.whenReceiveMessage('gameStart', function() {
 stage.whenReceiveMessage('gameEnd', function (){
     forever = false;
     thePrecious = null;
-    theDeadly = null;  
 
     this.switchBackdropTo(dead);
     scoreBoard.addClass('dead');
