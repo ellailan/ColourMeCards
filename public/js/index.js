@@ -15,7 +15,7 @@ let stage;
 // for anything not a vertical phone (mainly PC) we hack...
 if(window.innerHeight < 1743 && window.innerHeight < window.innerWidth) {
   //set a fixed stage size
-  stage = new blockLike.Stage({ width: 980, height: 1743 });
+  stage = new blockLike.Stage({ width: 980, height: 1743, pace: 0 });
   // zoom out (scale down)
   stage.ratio = window.innerHeight/1743;
   stage.zoom(stage.ratio * 100);
@@ -37,7 +37,7 @@ if(window.innerHeight < 1743 && window.innerHeight < window.innerWidth) {
   });
 
 } else {
-  stage = new blockLike.Stage();
+  stage = new blockLike.Stage({ pace: 0 });
 }
 
 
@@ -123,12 +123,10 @@ scoreBoard.addTo(stage);
 usernameDisplay.addTo(stage);
 information.addTo(stage);
 
-//button.goTo( -stage.width, 300)
 text.goTo(0, 300)
 drawing.goTo(0, -100)
 
 stage.whenFlag(function() {
-  //stage.broadcastMessage('gameStart')
   stage.broadcastMessage('drawingColor');
 
   if(!user){
@@ -277,7 +275,9 @@ function renderTable(scores, space) {
     // make template
     let string =
     `<div class="scores-container">
-      <span class="scores-game" style="background-image: url('../${item.game}/img/${item.game}-precious.svg')"></span>
+      <span class="scores-game" 
+        style="background-image: url('../${item.game}/img/${item.game}-precious.svg')">
+      </span>
       <span class="scores-username">${item.username}</span>
       <span class="scores-score">${item.score}</span>
     <div>`;
@@ -345,7 +345,7 @@ function createRegular (number){
     this.removeFrom(stage);
   })
 
-  newSprite.glide(5, newSprite.x, -stage.height / 2 - 100)
+  //newSprite.glide(5, newSprite.x, -stage.height / 2 - 100)
 }
 
 function createDeadly (){
@@ -363,7 +363,7 @@ function createDeadly (){
     this.removeFrom(stage);
   })
 
-  newSprite.glide(5, newSprite.x, -stage.height / 2 - 100)
+  //newSprite.glide(5, newSprite.x, -stage.height / 2 - 100)
 
   return newSprite;
 }
@@ -395,7 +395,7 @@ function createPrecious (){
     }
   })
 
-  newSprite.glide(5, newSprite.x, -stage.height / 2 - 100);
+  //newSprite.glide(5, newSprite.x, -stage.height / 2 - 100);
 
   return newSprite;
 }
@@ -409,18 +409,34 @@ information.whenReceiveMessage('gameStart', function(){
 
 stage.whenReceiveMessage('gameStart', function() {
   forever = true;
-  
-  while(forever){
-    // decide what to drop
-    if(!thePrecious){
-      thePrecious = createPrecious();
-    } else if(!theDeadly){
-      theDeadly = createDeadly();
-    } else {
-      createRegular(Math.floor((Math.random() * 8) + 1));
-    }
+  let counter = 0; 
 
-    this.wait(0.5)
+  while(forever){
+    if (counter % 10 === 0) {
+      // decide what to drop
+      if(!thePrecious){
+        thePrecious = createPrecious();
+      } else if(!theDeadly){
+        theDeadly = createDeadly();
+      } else {
+        createRegular(Math.floor((Math.random() * 8) + 1));
+      }
+    }
+    
+
+    this.wait(0.01)
+
+    // clone the array
+    let arr = stage.sprites.slice();
+    // removes the game pieces
+    for (var i = 0; i < arr.length; i++) {
+      if(arr[i].spriteType === 'gamePiece'){
+        arr[i].changeY(-15)
+        if (arr[i].y < -(stage.height / 2 + 100)){
+          stage.removeSprite(arr[i])
+        }
+      }
+    };
 
     // check if precious wasn't caught
     if(thePrecious) {
@@ -436,6 +452,7 @@ stage.whenReceiveMessage('gameStart', function() {
       }
     }
 
+    counter += 1;
     scoreBoard.inner(score + '')
   }
 })
