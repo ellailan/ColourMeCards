@@ -118,6 +118,7 @@ text.goTo(0, 300)
 drawing.goTo(0, -100)
 
 stage.whenFlag(function() {
+  stage.playSound('../sounds/jingle.wav')
   stage.broadcastMessage('drawingColor');
 
   if(!user){
