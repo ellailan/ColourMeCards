@@ -1,6 +1,6 @@
 # Colour Me Cards
 
-Colour Me Cards is your classic holiday card, with a modern twist.
+Colour Me Cards are your classic holiday cards, with a modern twist.
 
 It’s a black and white printed greeting card that comes in 4 different designs. The front of the card has original line-art, to be used as a colouring activity. The back of the card has a QR code and URL, leading to an interactive game inspired by the front. The inside of the card includes a cute message relating to the card design.
 

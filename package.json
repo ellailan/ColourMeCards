@@ -1,15 +1,16 @@
 {
-  "name": "colourmecards-server",
+  "name": "ColourMeCards",
   "version": "1.0.0",
-  "description": "",
+  "description": "Colour Me Cards are your classic holiday cards, with a modern twist.",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "dev": "./node_modules/.bin/nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Liam Ilan",
-  "license": "ISC",
+  "author": "Ella Ilan",
+  "contributors": [{"name": "Liam Ilan"}],
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
