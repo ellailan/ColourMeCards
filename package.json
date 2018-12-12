@@ -6,14 +6,19 @@
   "scripts": {
     "start": "node app.js",
     "dev": "./node_modules/.bin/nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "./node_modules/.bin/eslint ./public/js/index.js --fix"
   },
   "author": "Ella Ilan",
-  "contributors": [{"name": "Liam Ilan"}],
+  "contributors": [
+    {
+      "name": "Liam Ilan"
+    }
+  ],
   "license": "MIT",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/ellailan/ColourMeCards.git"
+    "type": "git",
+    "url": "https://github.com/ellailan/ColourMeCards.git"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -22,6 +27,9 @@
     "mongodb": "^3.1.10"
   },
   "devDependencies": {
+    "eslint": "^5.10.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
     "nodemon": "^1.18.7"
   }
 }
