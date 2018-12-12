@@ -16,6 +16,7 @@ Make sure you have node installed, and then:
 
 ```
 $ git clone https://github.com/ellailan/ColourMeCards.git
+$ cd ColourMeCards
 $ npm install
 $ npm start 
 ```
