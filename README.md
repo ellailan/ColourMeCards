@@ -32,16 +32,16 @@ This is my 7th grade Power Play Young Entrepreneur project. I designed the cards
 
 ## Made with
 
-https://scratch.mit.edu 
-https://www.blocklike.org
-https://www.heroku.com
+- https://scratch.mit.edu 
+- https://www.blocklike.org
+- https://www.heroku.com
 
 ## Credits
 
-All art by Ella Ilan
-Front end code by Ella Ilan and Liam Ilan
-Back end code by Liam Ilan
-Music by Liam Ilan
+- All art by Ella Ilan
+- Front end code by Ella Ilan and Liam Ilan
+- Back end code by Liam Ilan
+- Music by Liam Ilan
 
 ## Licence
 
