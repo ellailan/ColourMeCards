@@ -11,6 +11,10 @@
   "author": "Ella Ilan",
   "contributors": [{"name": "Liam Ilan"}],
   "license": "MIT",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/ellailan/ColourMeCards.git"
+  },
   "dependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
