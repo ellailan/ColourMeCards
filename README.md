@@ -2,7 +2,9 @@
 
 Colour Me Cards are your classic holiday cards, with a modern twist.
 
-It’s a black and white printed greeting card that comes in 4 different designs. The front of the card has original line-art, to be used as a colouring activity. The back of the card has a QR code and URL, leading to an interactive game inspired by the front. The inside of the card includes a cute message relating to the card design.
+It's a black and white printed greeting card that comes in 4 different designs. The front of the card has original line-art, to be used as a colouring activity. The back of the card has a QR code and URL, leading to an interactive game inspired by the front. The inside of the card includes a cute message relating to the card design.
+
+See the website in action: http://colourmecards.com
 
 ## Offline component
 
@@ -13,9 +15,9 @@ There are four ready-to-print PDFs, inside print.zip or the print directory, in 
 Make sure you have node installed, and then:
 
 ```
-$ git clone TODO: github repo
+$ git clone https://github.com/ellailan/ColourMeCards.git
 $ npm install
-$ npm start
+$ npm start 
 ```
 
 ## Customization
@@ -26,7 +28,7 @@ There are MS Word files, in the print directory. Create a new QR code (with a to
 
 ## About the project
 
-This is my seventh grade Power Play Young Entrepreneur project (https://www.powerplay4success.com/). I designed the cards with Scratch, and wrote the code with BlockLike. I sold each card for 50¢, and 4 for $2. TODO: sale results
+This is my 7th grade Power Play Young Entrepreneur project. I designed the cards with Scratch, and wrote the code with BlockLike. I sold each card for 50¢, and 4 for $1.50.
 
 ## Made with
 
@@ -40,7 +42,6 @@ All art by Ella Ilan
 Front end code by Ella Ilan and Liam Ilan
 Back end code by Liam Ilan
 Music by Liam Ilan
-Project management (and jokes) by Dad
 
 ## Licence
 
