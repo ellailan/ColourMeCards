@@ -323,7 +323,7 @@ function createRegular(number) {
   });
   newSprite.spriteType = 'gamePiece';
   newSprite.value = number;
-  newSprite.css({ filter: 'drop-shadow(rgb(102, 102, 102) 3px 3px 6px)' });
+  //newSprite.css({ filter: 'drop-shadow(rgb(102, 102, 102) 3px 3px 6px)' });
 
   newSprite.addTo(stage);
   newSprite.goTo(randomPlace(), stage.height / 2 + 100);
@@ -344,7 +344,7 @@ function createDeadly() {
     costume: deadly,
   });
   newSprite.spriteType = 'gamePiece';
-  newSprite.css({ filter: 'drop-shadow(rgb(102, 102, 102) 3px 3px 6px)' });
+  //newSprite.css({ filter: 'drop-shadow(rgb(102, 102, 102) 3px 3px 6px)' });
 
   newSprite.addTo(stage);
   newSprite.goTo(randomPlace(), stage.height / 2 + 100);
@@ -364,7 +364,7 @@ function createPrecious() {
   newSprite.spriteType = 'gamePiece';
   newSprite.precious = true;
 
-  newSprite.css({ filter: 'drop-shadow(rgb(102, 102, 102) 3px 3px 6px)' });
+  //newSprite.css({ filter: 'drop-shadow(rgb(102, 102, 102) 3px 3px 6px)' });
 
   newSprite.addTo(stage);
   newSprite.goTo(randomPlace(), stage.height / 2 + 100);
