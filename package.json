@@ -7,7 +7,7 @@
     "start": "node app.js",
     "dev": "./node_modules/.bin/nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "./node_modules/.bin/eslint ./public/js/index.js --fix"
+    "lint": "./node_modules/.bin/eslint ./public/js/*.js --fix"
   },
   "author": "Ella Ilan",
   "contributors": [
