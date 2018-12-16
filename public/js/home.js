@@ -62,12 +62,53 @@ function renderTable(scores, space) {
     sprite.inner(string);
 
     // alternate between -stage.width and stage.width
-    sprite.goTo((((i % 2) * 2) - 1) * stage.width, i * space - (space * scores.length / 2));
+    sprite.goTo((((i % 2) * 2) - 1) * stage.width, i * space - (space * scores.length / 2) - 136);
 
     // glide for 1 second to the middle
     sprite.glide(1, 0, sprite.y);
   });
 }
+
+const pug = new blockLike.Sprite({
+  image: './pug/img/pug-coloring15.svg',
+  width: 200,
+  height: 200,
+});
+const deer = new blockLike.Sprite({
+  image: './deer/img/deer-coloring15.svg',
+  width: 200,
+  height: 200,
+});
+const toast = new blockLike.Sprite({
+  image: './toast/img/toast-coloring15.svg',
+  width: 200,
+  height: 200,
+});
+const koala = new blockLike.Sprite({
+  image: './koala/img/koala-coloring15.svg',
+  width: 200,
+  height: 200,
+});
+
+const text = new blockLike.Sprite({
+  width: 500,
+});
+
+pug.addTo(stage);
+deer.addTo(stage);
+toast.addTo(stage);
+koala.addTo(stage);
+text.addTo(stage);
+
+text.inner('Click To Play');
+text.addClass('username-display');
+
+pug.goTo(-(stage.width / 2) + 36 + 100, stage.height / 2 - 136);
+deer.goTo(-(stage.width / 2) + 72 + 300, stage.height / 2 - 136);
+toast.goTo((stage.width / 2) - 72 - 300, stage.height / 2 - 136);
+koala.goTo((stage.width / 2) - 36 - 100, stage.height / 2 - 136);
+text.goTo(0, stage.height / 2 - 336);
+
 
 stage.whenLoaded(() => {
   // get scores
@@ -75,4 +116,20 @@ stage.whenLoaded(() => {
     // and then:
     stage.invoke(renderTable, [scores, 120]);
   });
+});
+
+pug.whenClicked(() => {
+  window.open('/pug');
+});
+
+deer.whenClicked(() => {
+  window.open('/deer');
+});
+
+toast.whenClicked(() => {
+  window.open('/toast');
+});
+
+koala.whenClicked(() => {
+  window.open('/koala');
 });
