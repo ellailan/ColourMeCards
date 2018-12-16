@@ -265,7 +265,7 @@ function renderTable(scores, space) {
   deleteTable();
 
   // make all rows
-  scores.reverse().forEach(async (item, i) => {
+  scores.reverse().forEach((item, i) => {
     // make template
     const string = `<div class="scores-container">
       <span class="scores-game" 
@@ -479,7 +479,7 @@ stage.whenReceiveMessage('gameEnd', function () {
 
 stage.whenReceiveMessage('showScoreBoard', () => {
   // get scores
-  api.getScores(async (scores) => {
+  api.getScores((scores) => {
     // and then:
     stage.invoke(renderTable, [scores, 120]);
     stage.wait(4);
