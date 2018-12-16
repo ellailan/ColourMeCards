@@ -98,7 +98,7 @@ pug.addTo(stage);
 deer.addTo(stage);
 toast.addTo(stage);
 koala.addTo(stage);
-text.addTo(stage);
+//text.addTo(stage);
 
 text.inner('Click To Play');
 text.addClass('username-display');
@@ -107,7 +107,7 @@ pug.goTo(-(stage.width / 2) + 36 + 100, stage.height / 2 - 136);
 deer.goTo(-(stage.width / 2) + 72 + 300, stage.height / 2 - 136);
 toast.goTo((stage.width / 2) - 72 - 300, stage.height / 2 - 136);
 koala.goTo((stage.width / 2) - 36 - 100, stage.height / 2 - 136);
-text.goTo(0, stage.height / 2 - 336);
+//text.goTo(0, stage.height / 2 - 336);
 
 
 stage.whenLoaded(() => {
