@@ -3,6 +3,8 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const cors = require('cors')
 const Mongo = require('mongodb')
+require('dotenv').config()
+
 
 // need ObjectId to find record by id
 const MongoClient = Mongo.MongoClient
@@ -12,7 +14,7 @@ const ObjectId = Mongo.ObjectId
 const generateUsername = require('./username-generator')
 
 //mongo data form heroku and mlab
-const mongoURI = 'mongodb://heroku_5dq6xsh1:7hr1gqgr1k4fg80p4lkpc33o3c@ds229465.mlab.com:29465/heroku_5dq6xsh1';
+const mongoURI = process.env.MONGOURI;
 
 //depretiation
 const mongoOptions = { useNewUrlParser: true };
