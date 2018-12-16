@@ -14,7 +14,7 @@ const ObjectId = Mongo.ObjectId
 const generateUsername = require('./username-generator')
 
 //mongo data form heroku and mlab
-const mongoURI = process.env.MONGOURI;
+const mongoURI = process.env.MONGODB_URI;
 
 //depretiation
 const mongoOptions = { useNewUrlParser: true };
