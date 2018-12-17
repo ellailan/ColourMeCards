@@ -61,7 +61,7 @@ app.post('/v1/scores/new', function(req, res) {
   .toArray(function(err, result) {
     if (err) return res.json({ result: 'error'})
     if (!result.length) return res.json({ result: 'fail'})
-    if (typeof req.body.score !== 'number') return res.json({ result: 'fail'})
+    if (req.body.score !== parseInt(req.body.score, 10)) return res.json({ result: 'fail'})
 
     const user = result[0]
 
