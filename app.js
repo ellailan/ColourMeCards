@@ -62,6 +62,7 @@ app.post('/v1/scores/new', function(req, res) {
     if (err) return res.json({ result: 'error'})
     if (!result.length) return res.json({ result: 'fail'})
     if (req.body.score !== parseInt(req.body.score, 10)) return res.json({ result: 'fail'})
+    if ('pug|deer|koala|toast'.split('|').indexOf(req.body.game) === -1 ) return res.json({ result: 'fail'})
 
     const user = result[0]
 
